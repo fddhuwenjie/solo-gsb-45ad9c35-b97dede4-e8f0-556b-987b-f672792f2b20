@@ -1,0 +1,17 @@
+services:
+  timber-api:
+    build: .
+    container_name: timber-repair-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - timber-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  timber-data:
