@@ -1,0 +1,16 @@
+services:
+  timber-repair:
+    build: .
+    image: timber-repair-api:latest
+    container_name: timber-repair-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - timber-data:/data
+    environment:
+      DB_PATH: /data/repair.db
+      PORT: "8080"
+    restart: unless-stopped
+
+volumes:
+  timber-data:
